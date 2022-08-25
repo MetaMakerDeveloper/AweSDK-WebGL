@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>SDK使用说明</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="./SDK使用说明_files/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#sdk%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">SDK使用说明</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E4%B8%89%E7%BB%B4%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">三维基本概念</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%9D%90%E6%A0%87%E7%B3%BB">坐标系</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%9C%BA%E6%99%AFscene">场景(Scene)</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E7%9B%B8%E6%9C%BAcamera">相机（Camera）</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E4%BA%BA%E7%89%A9human">人物（Human）</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%97%B6%E9%97%B4%E8%BD%B4timeline">时间轴（Timeline）</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%97%B6%E9%97%B4%E7%89%87timeslice">时间片（TimeSlice）</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93">案例总结</a></li>
+</ul>
+</li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#javascript-%E7%89%88-sdk-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">JavaScript 版 SDK 使用说明</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9D%E5%A7%8B%E5%8C%96">初始化</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%BC%95%E5%85%A5%E7%B1%BB%E5%BA%93">引入类库</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E4%B8%8A%E4%B8%8B%E6%96%87">创建上下文</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E8%AE%BE%E7%BD%AElicense">设置License</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E8%AE%BE%E7%BD%AE%E8%B5%84%E6%BA%90%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84">设置资源搜索路径</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E5%9C%BA%E6%99%AF">创建场景</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86">场景管理</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E7%9B%B8%E6%9C%BA">创建相机</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E4%BA%BA%E7%89%A9">创建人物</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E8%AE%BE%E7%BD%AE%E4%BA%BA%E7%89%A9%E8%BA%AB%E4%BD%93%E5%8F%98%E5%BD%A2">设置人物身体变形</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E8%AE%BE%E7%BD%AE%E4%BA%BA%E7%89%A9%E6%9C%8D%E8%A3%85">设置人物服装</a></li>
+</ul>
+</li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%97%B6%E9%97%B4%E8%BD%B4%E6%8E%A7%E5%88%B6">时间轴控制</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%97%B6%E9%97%B4%E7%89%87">时间片</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E7%9B%B8%E6%9C%BA%E6%97%B6%E9%97%B4%E7%89%87">创建相机时间片</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E4%BA%BA%E7%89%A9%E6%97%B6%E9%97%B4%E7%89%87">创建人物时间片</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%B7%BB%E5%8A%A0tts%E5%B1%9E%E6%80%A7">添加TTS属性</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E6%B7%BB%E5%8A%A0%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7">添加动画属性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E4%BA%8B%E5%8A%A1%E6%9C%BA%E5%88%B6">事务机制</a></li>
+</ul>
+</li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#c-%E7%89%88-sdk-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">C# 版 SDK 使用说明</a>
+<ul>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E9%9C%80%E8%A6%81%E5%BC%95%E5%85%A5%E7%9A%84sdk%E4%BE%9D%E8%B5%96">需要引入的SDK依赖</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%9C%BA%E6%99%AF%E7%9A%84%E5%88%9B%E5%BB%BA">场景的创建</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E8%8E%B7%E5%8F%96%E7%9B%B8%E6%9C%BA">获取相机</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E4%BA%BA%E7%89%A9-1">创建人物</a></li>
+<li><a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4%E8%BD%B4">创建时间轴</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 class="mume-header" id="sdk%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">SDK使用说明</h1>
+
+<h2 class="mume-header" id="%E4%B8%89%E7%BB%B4%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">三维基本概念</h2>
+
+<p>三维（3D）是在只有宽度和高度的平面二维系中又加入了一个深度而构成的空间坐标系</p>
+<p><span id="img1"></span><br>
+<img src="./SDK使用说明_files/c52db0429405a1479b15b22b15431c267b93698de374be870a983ea7440c4e89.png" alt="图 7"></p>
+<center>图一：三维场景图</center>
+<h3 class="mume-header" id="%E5%9D%90%E6%A0%87%E7%B3%BB">坐标系</h3>
+
+<p>三维空间最基本的就是坐标系，空间坐标系比平面坐标系多了一个Z轴，只需XYZ的值就可以确定空间中的一点。常见的空间坐标系有两种，左手坐标系和右手坐标系。我们的SDK使用的是左手坐标系，如下图：</p>
+<div align="center"><img src="./SDK使用说明_files/e4d777f94907781ccae8d54c2d2809557071841fbcb0d5178ad35cf50e635f7a.png"></div>
+<br>
+<center>图二：坐标系</center>
+<br>
+<p>在<a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#img1">图一：三维场景图</a>中，可以看到物体上有三种不同颜色的箭头，红色代表X轴，绿色代表Y轴，蓝色代表Z轴，这三条轴组成了该物体的空间坐标系。</p>
+<h3 class="mume-header" id="%E5%9C%BA%E6%99%AFscene">场景(Scene)</h3>
+
+<p>场景可以理解为一个空的无限大的容器，这个容器中有着一个你看不见的世界坐标原点以及三个坐标轴。你可以在场景里面放置一些对象，比如，相机，灯光，图形，模型等。</p>
+<p>如<a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#img1">图一：三维场景图</a>所示，除去图中的相机、正方体、光照后，就是一种最初始的，什么都没有的场景。</p>
+<h3 class="mume-header" id="%E7%9B%B8%E6%9C%BAcamera">相机（Camera）</h3>
+
+<p>屏幕上所看到的一切都是通过相机视角来展示的，而相机是附带了相机组件的对象，是场景中必用的对象。</p>
+<p>如<a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#img1">图一：三维场景图</a>所示，所选对象为场景中的相机，相机发射出来的几条线为相机的可视范围，右下角为当前相机所看到的界面。</p>
+<h3 class="mume-header" id="%E4%BA%BA%E7%89%A9human">人物（Human）</h3>
+
+<p>是通过引入了三维模型，使其具有人物的特征，其中的材质、纹理、贴图等，是为了能使所看到的人物更加生动，细节更加丰富的方法。</p>
+<p>如<a href="file:///C:/Users/Administrator/AppData/Local/Temp/mume2022527-10816-5qtcf8.0y4eo.html#img1">图一：三维场景图</a>所示，把图中所展示的正方体模型替换成人物模型即可</p>
+<h3 class="mume-header" id="%E6%97%B6%E9%97%B4%E8%BD%B4timeline">时间轴（Timeline）</h3>
+
+<p>时间轴是通过互联网技术和依据时间顺序，把一方面或者多方面的事件（时间片）串联起来，形成相对完整的记录体系，再运用图文的形式呈现给用户。</p>
+<p><img src="./SDK使用说明_files/4ce0dfdb431d62a9ac2ccec1d352faf131d4b9fbe76ffb96780dc499d80e7623.png" alt="图 8"></p>
+<center>图三：时间轴编辑界面</center>
+<h3 class="mume-header" id="%E6%97%B6%E9%97%B4%E7%89%87timeslice">时间片（TimeSlice）</h3>
+
+<p>时间片是实现对象动画、特效等的一种方法，它可以通过设置该对象的起始、结束时间，改变对象的动作等，然后在这段时间内完成你要实现动作。例如要实现人物朝着你走过来的效果就可以通过时间片来实现。</p>
+<p><img src="./SDK使用说明_files/timeSlice.png" alt="图 8"></p>
+<center>图四：MetaMaker界面</center>
+<h3 class="mume-header" id="%E6%A1%88%E4%BE%8B%E6%80%BB%E7%BB%93">案例总结</h3>
+
+<p>我就拿我们公司的产品MetaMaker来举例吧。</p>
+<p><img src="./SDK使用说明_files/48d978d8a1bbc510867b22a4ae819512f3ae9f64de17d48baac2823793d28a14.png" alt="图 3"></p>
+<center>图五：MetaMaker界面</center>
+<p>上图中，在区域一里，你能看到一个可爱的小人站在黑乎乎的“舞台”下，其实这个“舞台”是一个<strong>场景</strong>。除了数字人，场景还可以放入区域二里面的物品，素材等。</p>
+<p>在区域三中，你可以看到我们可以设置数字人的站位旋转等属性，其实这些都是通过<strong>坐标系</strong>来确定的，横向就是沿着X轴移动，纵向就是沿着Y轴移动，远近就是沿着Z轴移动，至于旋转，就是要沿着X、Y、Z来旋转你指定的角度。</p>
+<p>在区域一中，我们可以看到这个小人是面对我们的，那是因为我们的<strong>相机</strong>是放置于与小人等高，且处于小人面前的，所以，我们可以通过移动相机来查看小人的侧面，背面等不同的角度，相机就是你的眼睛。</p>
+<p>在区域四中，我们可以看到带着名字的不同颜色的小长条，比如这个挺胸跨立，它从00:00:00开始，在00：04:00结束，这表示这个数字人，在0-4s内一直保持着挺胸跨立的帅气姿势，此时你应该也稍微理解了，这个就是<strong>时间轴</strong>的作用了。</p>
+<p>最后，这个可爱的数字人就是我们的<strong>人物</strong>了，在我们的产品中，我们可以为我们的数字人更换外形、服装、动作表情等，与现实中的人物相差无几。你可以照你心中所想，打造属于你自己的数字人。</p>
+<h2 class="mume-header" id="javascript-%E7%89%88-sdk-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">JavaScript 版 SDK 使用说明</h2>
+
+<h3 class="mume-header" id="%E5%88%9D%E5%A7%8B%E5%8C%96">初始化</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword module keyword-import">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">AweSDK</span> <span class="token punctuation">}</span></span> <span class="token keyword module keyword-from">from</span> <span class="token string">'./AweSDK'</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-const">const</span> aweSDK <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">AweSDK</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+aweSDK<span class="token punctuation">.</span><span class="token method function property-access">setViewportRect</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">1280</span><span class="token punctuation">,</span> <span class="token number">720</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3D渲染画面尺寸，单位为px</span>
+aweSDK<span class="token punctuation">.</span><span class="token method function property-access">setBackgroundColor</span><span class="token punctuation">(</span><span class="token string">'#00000000'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置渲染画布背景颜色rgba</span>
+aweSDK<span class="token punctuation">.</span><span class="token method function property-access">load</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 初始化引擎</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%BC%95%E5%85%A5%E7%B1%BB%E5%BA%93">引入类库</h3>
+
+<p>引入awesdk-core、awesdk库并导入相应类</p>
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword module keyword-import">import</span> <span class="token imports"><span class="token punctuation">{</span> <span class="token maybe-class-name">Context</span><span class="token punctuation">,</span> <span class="token maybe-class-name">Vector3</span> <span class="token punctuation">}</span></span> <span class="token keyword module keyword-from">from</span> <span class="token string">'awesdk-core'</span>
+<span class="token keyword module keyword-import">import</span> <span class="token imports"><span class="token punctuation">{</span> 
+    <span class="token maybe-class-name">LicenseManager</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">ResourceManager</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">ErrorReporter</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">Scene</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">Human</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">HumanTimeSlice</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">Gender</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">BaseInfo</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">CameraTimeSlice</span><span class="token punctuation">,</span>
+    <span class="token maybe-class-name">TTSData</span>
+<span class="token punctuation">}</span></span> <span class="token keyword module keyword-from">from</span> <span class="token string">'awesdk'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%88%9B%E5%BB%BA%E4%B8%8A%E4%B8%8B%E6%96%87">创建上下文</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> context <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Context</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 该上下文用来存储运行时数据，需要保证全局只有一个</span>
+aweSDK<span class="token punctuation">.</span><span class="token method function property-access">setup</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将上下文设置到引擎中</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><h3 class="mume-header" id="%E8%AE%BE%E7%BD%AElicense">设置License</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> licenseManager <span class="token operator">=</span> <span class="token maybe-class-name">LicenseManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+licenseManager<span class="token punctuation">.</span><span class="token property-access">appKey</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">YourAppKey</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+licenseManager<span class="token punctuation">.</span><span class="token property-access">appSecret</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">YourAppSecret</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E8%AE%BE%E7%BD%AE%E8%B5%84%E6%BA%90%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84">设置资源搜索路径</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token maybe-class-name">ResourceManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">setCacheDirectory</span><span class="token punctuation">(</span><span class="token string">'/idbfs/cache'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置缓存路径，全局只有一个</span>
+<span class="token maybe-class-name">ResourceManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">addResourceDirectory</span><span class="token punctuation">(</span><span class="token string">'/idbfs/resource'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置资源路径，可添加多个</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><p>上面提到的<code>/idbfs</code>路径是将资源写到浏览器缓存里，如果不想写到缓存里，可以任意指定其他路径。</p>
+<h3 class="mume-header" id="%E5%88%9B%E5%BB%BA%E5%9C%BA%E6%99%AF">创建场景</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> scene <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Scene</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建场景</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取该场景时间轴</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">addElement</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将某个元素加入到该场景中</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">removeElement</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将某个元素从该场景中移除</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">useCamera</span><span class="token punctuation">(</span>camera<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 给场景指定一个相机</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取该场景中相机</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%9C%BA%E6%99%AF%E7%AE%A1%E7%90%86">场景管理</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> data <span class="token operator">=</span> <span class="token maybe-class-name">SceneManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">saveData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 保存场景数据</span>
+<span class="token keyword keyword-const">const</span> names <span class="token operator">=</span> <span class="token maybe-class-name">SceneManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">loadData</span><span class="token punctuation">(</span><span class="token string">'domain'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 加载场景数据，返回该数据中所有场景的名称</span>
+<span class="token keyword keyword-const">const</span> scene <span class="token operator">=</span> <span class="token maybe-class-name">SceneManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">switchScene</span><span class="token punctuation">(</span><span class="token string">'default'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 切换到指定名称场景，并返回场景对象</span>
+<span class="token maybe-class-name">SceneManager</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 重置所有场景</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%88%9B%E5%BB%BA%E7%9B%B8%E6%9C%BA">创建相机</h3>
+
+<p>创建场景时，默认会创建一个相机，可以通过<code>getCamera()</code>获取</p>
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> defaultCamera <span class="token operator">=</span> scene<span class="token punctuation">.</span><span class="token method function property-access">getCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><p>当然也可以通过以下方法创建第二相机</p>
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> camera <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Camera</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建相机</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">addElement</span><span class="token punctuation">(</span>camera<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将相机加入到场景中</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">useCamera</span><span class="token punctuation">(</span>camera<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将场景中的相机指定为该相机，设置后将会覆盖场景中默认相机</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%88%9B%E5%BB%BA%E4%BA%BA%E7%89%A9">创建人物</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token comment">/* 设置人物信息
+ * faceTarget、faceMapping资源可通过MetaMakerStudio创建人物获得（或联系商务人员）
+ * 如果想要使用处理过后的皮肤贴图资源，则将处理过的皮肤贴图资源下载到faceMapping同级目录下，文件名命名规则为：脸部贴图在faceMapping路径的基础上加入`_head_skin`；身体贴图在faceMapping路径的基础上加入`_body_skin`
+ * 例如：faceMapping路径为`tmp/52440327cd9d2ad049e417399caaa951f39b7cfb.jpg`，则脸部贴图路径为`tmp/52440327cd9d2ad049e417399caaa951f39b7cfb_head_skin.jpg`，身体贴图路径为`tmp/52440327cd9d2ad049e417399caaa951f39b7cfb_body_skin.jpg`
+ */</span>
+
+<span class="token keyword keyword-const">const</span> humanInfo <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">BaseInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+humanInfo<span class="token punctuation">.</span><span class="token property-access">gender</span> <span class="token operator">=</span> <span class="token maybe-class-name">Gender</span><span class="token punctuation">.</span><span class="token property-access"><span class="token maybe-class-name">Male</span></span><span class="token punctuation">;</span> <span class="token comment">// 设置人物性别，当前设置为男性</span>
+humanInfo<span class="token punctuation">.</span><span class="token property-access">faceTarget</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">tmp/ee1af3ae10dba71a0a5292db52018a5f14350a03.target</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> <span class="token comment">// 设置人物脸部变形</span>
+humanInfo<span class="token punctuation">.</span><span class="token property-access">faceMapping</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">tmp/52440327cd9d2ad049e417399caaa951f39b7cfb.jpg</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span> <span class="token comment">// 设置人物脸部贴图</span>
+humanInfo<span class="token punctuation">.</span><span class="token property-access">bodyMapping</span> <span class="token operator">=</span> <span class="token keyword null nil keyword-null">null</span><span class="token punctuation">;</span> <span class="token comment">// 设置人物身体贴图</span>
+
+<span class="token keyword keyword-const">const</span> human <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Human</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> humanInfo<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据人物信息创建人物</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">setPosition</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置人物位置，默认Vector3.zero()，单位为米</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">setRotation</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">180</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置人物旋转，默认Vector3.zero()</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">addElement</span><span class="token punctuation">(</span>human<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将人物加入到场景中</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h4 class="mume-header" id="%E8%AE%BE%E7%BD%AE%E4%BA%BA%E7%89%A9%E8%BA%AB%E4%BD%93%E5%8F%98%E5%BD%A2">设置人物身体变形</h4>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers">human<span class="token punctuation">.</span><span class="token method function property-access">setTarget</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">13005</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置身体变形，此处设置为壮硕体型，取值范围及更多请参考：http://docs.avatarworks.com/zh_CN/latest/awsdk/target_male.html</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getTarget</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">13005</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取变形值</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">resetAllTargets</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 重置身体变形</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><h4 class="mume-header" id="%E8%AE%BE%E7%BD%AE%E4%BA%BA%E7%89%A9%E6%9C%8D%E8%A3%85">设置人物服装</h4>
+
+<p>内部维护服装替换关系</p>
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers">human<span class="token punctuation">.</span><span class="token method function property-access">wearUnderwears</span><span class="token punctuation">(</span><span class="token string">"cloth/nv_neiyi_03_down"</span><span class="token punctuation">,</span> <span class="token string">"cloth/nv_neiyi_03_up"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置内衣、内裤</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getUnderwears</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//获取内衣、内裤</span>
+
+human<span class="token punctuation">.</span><span class="token method function property-access">wearHair</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">cloth/nv_tf_159</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置发型</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getHair</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取发型</span>
+
+human<span class="token punctuation">.</span><span class="token method function property-access">wearShoes</span><span class="token punctuation">(</span><span class="token string">'cloth/nv_shoes_78'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置鞋子</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getShoes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取鞋子</span>
+
+human<span class="token punctuation">.</span><span class="token method function property-access">wearGlasses</span><span class="token punctuation">(</span><span class="token string">'close/glasses_10'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置眼镜</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getGlasses</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取眼镜</span>
+
+human<span class="token punctuation">.</span><span class="token method function property-access">wearFacialHair</span><span class="token punctuation">(</span><span class="token string">'texture/facial_hair.png'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置胡子</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getFacialHair</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取胡子</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>外部维护服装替换关系</p>
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers">human<span class="token punctuation">.</span><span class="token method function property-access">wearOutfits</span><span class="token punctuation">(</span><span class="token string">"cloth/nv_down_02_02"</span><span class="token punctuation">,</span> <span class="token string">"cloth/nv_up_07_01_02"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置服装，请注意，如果列表中有相同类型的服装，后一套将取代前一套</span>
+human<span class="token punctuation">.</span><span class="token method function property-access">getOutfits</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取身上所有服饰</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><h3 class="mume-header" id="%E6%97%B6%E9%97%B4%E8%BD%B4%E6%8E%A7%E5%88%B6">时间轴控制</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers">scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">addTimeSlice</span><span class="token punctuation">(</span>slice<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将时间片添加到时间轴中</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">removeTimeSlice</span><span class="token punctuation">(</span>slice<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 将时间片从时间轴中删除</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">removeTimeSliceById</span><span class="token punctuation">(</span>slceId<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据id删除时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">removeAllTimeSlices</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 删除时间轴中所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">reset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 重置时间轴</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">getAllTimeSlices</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取时间轴上所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">findTimeSlicesByElement</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据场景对象，查找该对象上所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">findTimeSlicesByTag</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 根据标签，查找该标签下所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">findTimeSlicesAtTime</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 查找该时刻所在的所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">cloneTimeSlicesAtTime</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 复制该时刻所在的所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">interrupt</span><span class="token punctuation">(</span>slices<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 打断机制，调用该接口时，会立即执行传入的时间片数据，执行结束后继续执行打断前的时间片数据</span>
+
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">setLoop</span><span class="token punctuation">(</span><span class="token known-class-name class-name">Number</span><span class="token punctuation">.</span><span class="token constant">MAX_VALUE</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置时间轴的循环次数，小于0时无限循环</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">play</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 从0秒开始播放</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">pause</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 暂停播放</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">resume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 从暂停时刻继续播放</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 停止播放</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">getDuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取时间轴总时长</span>
+
+<span class="token comment">// 跳转到指定时间播放</span>
+<span class="token comment">// 如果设置时间小于0时，则为0；</span>
+<span class="token comment">// 如果设置时间（time）大于时间轴总时长(totalTime)，则会将时间计算到0-totalTime范围内，计算规则（time % totalTime）</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">seekTime</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">getSeekTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取当前时间轴时间</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">beforeSeekingTime</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置seekTime方法执行前的回调函数</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">afterSeekingTime</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置seekTime方法执行后的回调函数</span>
+
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">destroyAllTimeSlices</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 销毁时间轴上所有时间片</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 销毁时间轴</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h4 class="mume-header" id="%E6%97%B6%E9%97%B4%E7%89%87">时间片</h4>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers">slice<span class="token punctuation">.</span><span class="token method function property-access">addTag</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 给时间片添加标签，同一时间片可添加多个标签</span>
+slice<span class="token punctuation">.</span><span class="token method function property-access">hasTag</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 检查时间片是否具有该标签</span>
+slice<span class="token punctuation">.</span><span class="token method function property-access">removeTag</span><span class="token punctuation">(</span>tag<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 从该时间片移除标签</span>
+slice<span class="token punctuation">.</span><span class="token method function property-access">clearTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 清除该时间片所有标签</span>
+slice<span class="token punctuation">.</span><span class="token method function property-access">getAllTags</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 获取该时间片所有标签</span>
+slice<span class="token punctuation">.</span><span class="token method function property-access">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 销毁该时间片</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h4 class="mume-header" id="%E5%88%9B%E5%BB%BA%E7%9B%B8%E6%9C%BA%E6%97%B6%E9%97%B4%E7%89%87">创建相机时间片</h4>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> cameraSlice <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">CameraTimeSlice</span><span class="token punctuation">(</span>scene<span class="token punctuation">.</span><span class="token method function property-access">getCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建相机时间片，并将当前相机设置到时间片</span>
+cameraSlice<span class="token punctuation">.</span><span class="token method function property-access">setStartTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置该时间片开始时间</span>
+cameraSlice<span class="token punctuation">.</span><span class="token method function property-access">setDuration</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置该时间片持续时间</span>
+cameraSlice<span class="token punctuation">.</span><span class="token method function property-access">setPosition</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.8</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置相机位置，从第一个坐标移动到第二个坐标</span>
+cameraSlice<span class="token punctuation">.</span><span class="token method function property-access">onActive</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">timeOffset</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 当该时间片从非活动状态更改为活动状态时调用，回调函数返回时间偏移值，单位为秒</span>
+cameraSlice<span class="token punctuation">.</span><span class="token method function property-access">onInactive</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token arrow operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 当该时间片从活动状态更改为非活动状态时调用</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h4 class="mume-header" id="%E5%88%9B%E5%BB%BA%E4%BA%BA%E7%89%A9%E6%97%B6%E9%97%B4%E7%89%87">创建人物时间片</h4>
+
+<h5 class="mume-header" id="%E6%B7%BB%E5%8A%A0tts%E5%B1%9E%E6%80%A7">添加TTS属性</h5>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token comment">/* 设置TTS信息，TTS对象所需的资源可通过`http://open.metamaker.cn/api/tts/v1/text_to_anim`接口请求得到，具体请求方式参考（服务器文档地址）
+ * id为该TTS唯一标识，并且资源命名要使用该id命名，例如：
+ *   音频文件命名为：8ee6d0418eaa08e40ad667b400177c1c.wav
+ *   表情动画文件命名为：8ee6d0418eaa08e40ad667b400177c1c_expression.anim
+ *   口型动画命名为：8ee6d0418eaa08e40ad667b400177c1c_teeth.anim
+ */</span>
+<span class="token keyword keyword-const">const</span> ttsData <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">TTSData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+ttsData<span class="token punctuation">.</span><span class="token property-access">id</span> <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">8ee6d0418eaa08e40ad667b400177c1c</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+ttsData<span class="token punctuation">.</span><span class="token property-access">volume</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// 设置TTS音频播放音量</span>
+ttsData<span class="token punctuation">.</span><span class="token property-access">playAudio</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 是否播放音频</span>
+ttsData<span class="token punctuation">.</span><span class="token property-access">playFaceAnimation</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 是否使用表情动画</span>
+ttsData<span class="token punctuation">.</span><span class="token property-access">playMouthAnimation</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">// 是否使用口型动画</span>
+
+<span class="token keyword keyword-const">const</span> ttsSlice <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">HumanTimeSlice</span><span class="token punctuation">(</span>human<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 创建人物时间片，并将人物设置道时间片</span>
+ttsSlice<span class="token punctuation">.</span><span class="token method function property-access">setStartTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ttsSlice<span class="token punctuation">.</span><span class="token method function property-access">setDuration</span><span class="token punctuation">(</span><span class="token number">3.239</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置该时间片持续时间，如果该时间超出音频时间，则超出部分的时间没有声音</span>
+ttsSlice<span class="token punctuation">.</span><span class="token method function property-access">setTTS</span><span class="token punctuation">(</span>ttsData<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置TTS数据</span>
+scene<span class="token punctuation">.</span><span class="token method function property-access">getTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">addTimeSlice</span><span class="token punctuation">(</span>ttsSlice<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h5 class="mume-header" id="%E6%B7%BB%E5%8A%A0%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7">添加动画属性</h5>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token keyword keyword-const">const</span> animationSlice <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token class-name">HumanTimeSlice</span><span class="token punctuation">(</span>human<span class="token punctuation">)</span><span class="token punctuation">;</span>
+animationSlice<span class="token punctuation">.</span><span class="token method function property-access">setStartTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+animationSlice<span class="token punctuation">.</span><span class="token method function property-access">setDuration</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+animationSlice<span class="token punctuation">.</span><span class="token method function property-access">setAnimation</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">anim/anim_220415_F36</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 设置人物动画</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E4%BA%8B%E5%8A%A1%E6%9C%BA%E5%88%B6">事务机制</h3>
+
+<pre data-role="codeBlock" data-info="js{.line-numbers}" class="language-javascript line-numbers"><span class="token maybe-class-name">Transaction</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 开始事务</span>
+<span class="token maybe-class-name">Transaction</span><span class="token punctuation">.</span><span class="token method function property-access">getInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token method function property-access">commit</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 执行事务，如果不调用该函数，则事务不会停止</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><h2 class="mume-header" id="c-%E7%89%88-sdk-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">C# 版 SDK 使用说明</h2>
+
+<h3 class="mume-header" id="%E9%9C%80%E8%A6%81%E5%BC%95%E5%85%A5%E7%9A%84sdk%E4%BE%9D%E8%B5%96">需要引入的SDK依赖</h3>
+
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers"><span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK<span class="token punctuation">.</span>Authorization</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK<span class="token punctuation">.</span>Core</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK<span class="token punctuation">.</span>Core<span class="token punctuation">.</span>Values</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK<span class="token punctuation">.</span>DataBridge</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK<span class="token punctuation">.</span>DataBridge<span class="token punctuation">.</span>Sockets</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-using">using</span> <span class="token namespace">AweSDK<span class="token punctuation">.</span>Scene</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%9C%BA%E6%99%AF%E7%9A%84%E5%88%9B%E5%BB%BA">场景的创建</h3>
+
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers"><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">DllImport</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">"winmm"</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword keyword-static">static</span> <span class="token keyword keyword-extern">extern</span> <span class="token return-type class-name"><span class="token keyword keyword-uint">uint</span></span> <span class="token function">timeGetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">DllImport</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">"winmm"</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword keyword-static">static</span> <span class="token keyword keyword-extern">extern</span> <span class="token return-type class-name"><span class="token keyword keyword-void">void</span></span> <span class="token function">timeBeginPeriod</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword keyword-int">int</span></span> t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">DllImport</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">"winmm"</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword keyword-static">static</span> <span class="token keyword keyword-extern">extern</span> <span class="token return-type class-name"><span class="token keyword keyword-uint">uint</span></span> <span class="token function">timeEndPeriod</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword keyword-int">int</span></span> t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">DllImport</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">"user32.dll"</span><span class="token punctuation">,</span> CharSet <span class="token operator">=</span> CharSet<span class="token punctuation">.</span>Auto<span class="token punctuation">,</span> ExactSpelling <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword keyword-public">public</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-extern">extern</span> <span class="token return-type class-name">IntPtr</span> <span class="token function">GetForegroundWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获得本窗体的句柄</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">DllImport</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">"user32.dll"</span><span class="token punctuation">,</span> EntryPoint <span class="token operator">=</span> <span class="token string">"SetForegroundWindow"</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword keyword-public">public</span> <span class="token keyword keyword-static">static</span> <span class="token keyword keyword-extern">extern</span> <span class="token return-type class-name"><span class="token keyword keyword-bool">bool</span></span> <span class="token function">SetForegroundWindow</span><span class="token punctuation">(</span><span class="token class-name">IntPtr</span> hWnd<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置此窗体为活动窗体</span>
+
+<span class="token class-name">Context</span> context<span class="token punctuation">;</span>
+<span class="token class-name">SocketClient</span> client<span class="token punctuation">;</span>
+
+<span class="token keyword keyword-public">public</span> <span class="token return-type class-name"><span class="token keyword keyword-void">void</span></span> <span class="token function">InitScene</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    context <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Context</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//使用鉴权</span>
+    <span class="token class-name">LicenseManager</span> licenseManager <span class="token operator">=</span> LicenseManager<span class="token punctuation">.</span><span class="token function">GetInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    licenseManager<span class="token punctuation">.</span>AppKey <span class="token operator">=</span> <span class="token string">"YourAppKey"</span><span class="token punctuation">;</span>
+    licenseManager<span class="token punctuation">.</span>AppSecret <span class="token operator">=</span> <span class="token string">"YourAppSecret"</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//加载资源路径</span>
+    ResourceManager<span class="token punctuation">.</span><span class="token function">GetInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">SetCacheDirectory</span><span class="token punctuation">(</span><span class="token string">"E:/Resources/temp/cache/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ResourceManager<span class="token punctuation">.</span><span class="token function">GetInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">AddResourceDirectory</span><span class="token punctuation">(</span><span class="token string">"E:/Resources/temp/media/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ResourceManager<span class="token punctuation">.</span><span class="token function">GetInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">AddResourceDirectory</span><span class="token punctuation">(</span><span class="token string">"E:/Resources/temp/media/cloth/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ResourceManager<span class="token punctuation">.</span><span class="token function">GetInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">AddResourceDirectory</span><span class="token punctuation">(</span><span class="token string">"E:/Resources/temp/media/anim/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//加载数据交换器</span>
+    <span class="token class-name"><span class="token keyword keyword-var">var</span></span> exchanger <span class="token operator">=</span> DataExchanger<span class="token punctuation">.</span><span class="token function">GetInstance</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    client <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">SocketClient</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token string">"127.0.0.1"</span><span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    client<span class="token punctuation">.</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    exchanger<span class="token punctuation">.</span><span class="token function">SetDataBridge</span><span class="token punctuation">(</span>client<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Thread</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//创建场景</span>
+    <span class="token class-name">Scene</span> scene <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Scene</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token comment">//用于保证毫秒级别的消息间隔</span>
+<span class="token keyword keyword-private">private</span> <span class="token return-type class-name"><span class="token keyword keyword-void">void</span></span> <span class="token function">timer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword keyword-try">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword keyword-uint">uint</span></span> timerstart <span class="token operator">=</span> <span class="token function">timeGetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token class-name"><span class="token keyword keyword-uint">uint</span></span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">30</span><span class="token punctuation">)</span>     <span class="token comment">//N为时间间隔（ms）</span>
+            <span class="token punctuation">{</span>
+                i <span class="token operator">=</span> <span class="token function">timeGetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> timerstart<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            timerstart <span class="token operator">=</span> <span class="token function">timeGetTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//WPF中用于将线程回归主线程的方法，确保数据的一致性</span>
+            Dispatcher<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">OnUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-catch">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        Trace<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-private">private</span> <span class="token return-type class-name"><span class="token keyword keyword-void">void</span></span> <span class="token function">OnUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Trace<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"h:mm:ss.fff"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    time <span class="token operator">+=</span> <span class="token number">0.03f</span><span class="token punctuation">;</span>
+
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>client<span class="token punctuation">.</span><span class="token function">IsConnected</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> time <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        client<span class="token punctuation">.</span><span class="token function">Connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        time <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> 
+    context<span class="token punctuation">.</span><span class="token function">Update</span><span class="token punctuation">(</span><span class="token number">0.03f</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Trace<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">"===="</span> <span class="token operator">+</span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token string">"h:mm:ss.fff"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>time <span class="token operator">&gt;</span> <span class="token number">15</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        time <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E8%8E%B7%E5%8F%96%E7%9B%B8%E6%9C%BA">获取相机</h3>
+
+<p>创建一个场景后默认会自动创建一个相机，我们可以通过场景来获取相机</p>
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers"><span class="token class-name">Camera</span> camera <span class="token operator">=</span> scene<span class="token punctuation">.</span><span class="token function">GetCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span>；
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></pre><p>当然也可以通过以下方法创建第二相机</p>
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers"><span class="token class-name">Camera</span> camera2 <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Camera</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+scene<span class="token punctuation">.</span><span class="token function">AddElement</span><span class="token punctuation">(</span>camera2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+scene<span class="token punctuation">.</span><span class="token function">UseCamera</span><span class="token punctuation">(</span>camera2<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//使用第二相机</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%88%9B%E5%BB%BA%E4%BA%BA%E7%89%A9-1">创建人物</h3>
+
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers"><span class="token comment">//设置人物信息</span>
+<span class="token class-name">Human<span class="token punctuation">.</span>BaseInfo</span> humanInfo<span class="token punctuation">;</span>
+humanInfo<span class="token punctuation">.</span>Gender <span class="token operator">=</span> Human<span class="token punctuation">.</span>Gender<span class="token punctuation">.</span>Male<span class="token punctuation">;</span> <span class="token comment">//设置人物性别，当前设置为男</span>
+humanInfo<span class="token punctuation">.</span>FaceTarget <span class="token operator">=</span> <span class="token string">"test_res/test.target"</span><span class="token punctuation">;</span> <span class="token comment">//设置人物面部特征</span>
+humanInfo<span class="token punctuation">.</span>FaceMapping <span class="token operator">=</span> <span class="token string">"test_res/test.jpg"</span><span class="token punctuation">;</span> <span class="token comment">//设置人物面部蒙版</span>
+humanInfo<span class="token punctuation">.</span>BodyMapping <span class="token operator">=</span> <span class="token keyword keyword-null">null</span><span class="token punctuation">;</span>
+
+<span class="token comment">//根据人物信息生成一个人物</span>
+human <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Human</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> humanInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+human<span class="token punctuation">.</span><span class="token function">SetPosition</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置人物初始位置，此处用到空间坐标系</span>
+human<span class="token punctuation">.</span><span class="token function">SetTarget</span><span class="token punctuation">(</span><span class="token string">"13005"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置人物特征，此处设置为，将该人物设置成壮硕体型，具体参考 http://docs.avatarworks.com/zh_CN/latest/awsdk/target_male.html</span>
+human<span class="token punctuation">.</span><span class="token function">WearHair</span><span class="token punctuation">(</span><span class="token string">"cloth/nan_tf_133"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置人物发型</span>
+human<span class="token punctuation">.</span><span class="token function">WearOutfits</span><span class="token punctuation">(</span><span class="token string">"cloth/nan_down_02"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置人物服装</span>
+scene<span class="token punctuation">.</span><span class="token function">AddElement</span><span class="token punctuation">(</span>human<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//将人物加入到场景中</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre><p>需要重新设置人物特征时，需要使用以下代码</p>
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers">human<span class="token punctuation">.</span><span class="token function">ResetAllTargets</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//重设所有人物特征</span>
+human<span class="token punctuation">.</span><span class="token function">SetTarget</span><span class="token punctuation">(</span><span class="token string">"13007"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//改变人物体型，将其改为瘦弱体型</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></pre><h3 class="mume-header" id="%E5%88%9B%E5%BB%BA%E6%97%B6%E9%97%B4%E8%BD%B4">创建时间轴</h3>
+
+<pre data-role="codeBlock" data-info="csharp{.line-numbers}" class="language-csharp line-numbers"><span class="token comment">//创建时间轴</span>
+<span class="token comment">//该时间轴用于在5s内改变相机远近位置</span>
+<span class="token class-name">CameraTimeSlice</span> cameraTimeSlice <span class="token operator">=</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">CameraTimeSlice</span><span class="token punctuation">(</span>scene<span class="token punctuation">.</span><span class="token function">GetCamera</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cameraTimeSlice<span class="token punctuation">.</span><span class="token function">SetStartTime</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置该时间轴开始时间</span>
+cameraTimeSlice<span class="token punctuation">.</span><span class="token function">SetDuration</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置该时间轴持续时间</span>
+cameraTimeSlice<span class="token punctuation">.</span><span class="token function">SetPosition</span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.5f</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-new">new</span> <span class="token constructor-invocation class-name">Vector3</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置时间轴动作，从第一个坐标移动到第二个坐标</span>
+scene<span class="token punctuation">.</span><span class="token function">GetTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">AddTimeSlice</span><span class="token punctuation">(</span>cameraTimeSlice<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//将时间轴加入到场景时间轴中</span>
+
+scene<span class="token punctuation">.</span><span class="token function">GetTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">SetLoop</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span><span class="token punctuation">.</span>MaxValue<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//设置循环次数</span>
+scene<span class="token punctuation">.</span><span class="token function">GetTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Play</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//开始播放</span>
+scene<span class="token punctuation">.</span><span class="token function">GetTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Pause</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//暂停播放</span>
+scene<span class="token punctuation">.</span><span class="token function">GetTimeline</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Stop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//停止播放</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  </body></html>

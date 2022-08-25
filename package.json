@@ -1,0 +1,37 @@
+{
+  "name": "unity-webgl-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "awesdk": "file:awesdk-1.0.0.tgz",
+    "awesdk-core": "file:awesdk-core-1.0.0.tgz",
+    "awesdk-databridge": "file:awesdk-databridge-1.0.0.tgz",
+    "crypto-js": "^4.1.1",
+    "events": "^3.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "@types/node": "^18.7.11",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^10.2.4",
+    "css-loader": "^6.4.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-json": "^3.1.0",
+    "html-webpack-plugin": "^5.3.2",
+    "standard": "^16.0.3",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.1.1"
+  }
+}
