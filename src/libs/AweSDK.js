@@ -57,7 +57,6 @@ class MyDataBridge extends IDataBridge {
     }
 
     sendData(data) {
-        console.log('AweSDK sendData : ', data);
         window.MyUnityInstance.Module.SendMessageToUnity(data);
     }
 }

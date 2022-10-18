@@ -93,7 +93,7 @@ export class ResourceHelper {
     downloadStaticResource(names) {
         const resources = {}
         names.map(value => {
-            const resKey = `${Config.domain}/webgl/app/${value}?123`;
+            const resKey = `${Config.domain}/webgl/app/${value}?${Date.now()}`;
             const resPath = `${Config.cachePath}/${value}.zip`
             resources[resKey] = resPath
         });

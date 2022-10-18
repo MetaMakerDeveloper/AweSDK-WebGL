@@ -62,7 +62,7 @@ module.exports = {
       patterns: [
         { from: "public/data", to: "data" },
       ],
-    }),
+    })
   ],
   optimization: {
     minimize: true

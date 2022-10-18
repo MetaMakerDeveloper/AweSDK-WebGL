@@ -1,131 +1,27 @@
-# AweSDK for WebGL
+# UnityWebGLExample使用说明
 
-Import the following three dynamic libraries into the project
-- `awesdk-1.0.0.tgz`
-- `awesdk-core-1.0.0.tgz`
-- `awesdk-databridge-1.0.0.tgz`
+## 环境配置
+安装npm环境，安装步骤参考： [https://docs.npmjs.com/cli/v8/configuring-npm/install](https://docs.npmjs.com/cli/v8/configuring-npm/install)
 
-## Environment Setup
-Create a `Setup` method. The method will create a `Context` object, initialize the SDK environment, and apply the license information. 
-- Import the necessary namespaces. For example.
-
-```javascript
-import { Color, Context, Vector3 } from 'awesdk-core'
-import { IDataBridge, DataExchanger } from "awesdk-databridge";
-import { LicenseManager, HumanTimeSlice, Gender, ErrorReporter, BaseInfo, CameraTimeSlice, Timeline, TTSData, Transaction, SceneManager, Human } from 'awesdk'
+## 运行示例代码
 ```
-
-- Create a context and setup the environment. As follows.
-
-```javascript
-function setup() {
-    const context = new Context();
-    Environment.setup(context);
-}
+cd /UnityWebGLExample
+npm install
+npm start
 ```
+打开浏览器输入：[http://localhost:3000/](http://localhost:3000/)
 
-## Setup the data bridge
-
-The SDK uses sockets to communicate data, so we need to setup a socket data bridge.
-
-```javascript
-class MyDataBridge extends IDataBridge {
-    constructor(context) {
-        super(context);
-        this.mContext = context;
-    }
-
-    sendData(data) {
-        //  SendMessageToUnity, this method is JS to Unity communicate data.
-        window.MyUnityInstance.Module.SendMessageToUnity(data);
-    }
-}
-
-function setupDataBridge(context) {
-    const exchanger = DataExchanger.getInstance(context);
-    exchanger.setDataBridge(new MyDataBridge(context));
-    //  ReceiveMessage, this method is Unity to JS communicate data.
-    window.MyUnityInstance.Module.ReceiveMessage((msg) => {
-        exchanger.didReceiveMessage(msg);
-    });
-}
+## 目录结构简介
 ```
-
-## Setup License
-
-Developers need to apply for `AppKey` and `AppSecret` in the open platform and set them to the SDK before they can use the functions of the SDK.
-
-```javascript
-function setupLicense() {
-    const licenseManager = LicenseManager.getInstance(context);
-    //  Please replace the AppKey and AppSecret.
-    licenseManager.appKey = `{YourAppKey}`;
-    licenseManager.appSecret = `{YourAppSecret}`;
-}
+document：SDK使用说明文档
+public/data：引擎资源及类库。如果需要修改此文件夹位置，则需要同时修改 AweSDK.js 文件 21-31 行对应资源引用路径
+src：该示例源代码
+src/libs/TemplateData：UnityWebGL模板资源
+awesdk-1.0.0.tgz：黑镜数字人SDK
+awesdk-core-1.0.0.tgz：黑镜数字人核心库
+awesdk-databridge-1.0.0.tgz： 黑镜数字人数据转接桥
+index.html：UnityWebGL启动模板
+package.json：项目配置文件
+webpack.config.js：webpack配置文件
+    webpack配置文件需要添加CopyPlugin组件，用于在生产环境时，将public/data文件夹拷贝到输出路径下data文件夹
 ```
-
-**Note: Developers need to replace the `[YourAppKey]` and `[YourAppSecret]` in the sample code with the `AppKey` and `AppSecret` values that have been applied**. 
-
-## Setup resource paths
-
-The SDK relies on resources such as animations, dresses, etc., so we need to setup cache paths and resource paths so that the SDK can load resources and control caching.
-
-```javascript
-function setupResources() {
-    const resourceManager = ResourceManager.getInstance(context);
-    //  Set the cache directory.
-    resourceManager.setCacheDirectory(Config.cachePath);
-    //  Add a resource directory, you can add more than one.
-    resourceManager.addResourceDirectory(Config.resourcePath);
-}
-```
-Developers need to extract the downloaded resource package to the resource path provided above by themselves.
-
-## Load Human
-
-Once the above environment is running, we call the interface `LoadHuman(context)` for loading a human in the last step. 
-
-```javascript
-function loadHuman(context) {
-    // Quickly build a human using information such as gender, face mapping and face target。
-    const gender = Gender.Female;
-    const faceTarget = "xiaojing/face.target";
-    const faceMapping = "xiaojing/face.jpg";
-    const baseInfo = new BaseInfo(gender, faceTarget, faceMapping);
-    const human = new Human(context, baseInfo);
-
-    // Set target parameters for the human.
-    human.setTarget("20003", 1);
-    human.setTarget("23002", 0.5);
-    human.setTarget("20101", 0.4769);
-    human.setTarget("20102", -0.3075);
-    human.setTarget("20502", -0.3522);
-    human.setTarget("23202", 0.4769);
-    human.setTarget("23503", -0.8489);
-
-    // Wear hair, outfits, shoes, etc.
-    human.wearHair("cloth/nv_tf_128");
-    human.wearOutfits("cloth/nv_up_06", "cloth/nv_tz_117_down");
-    human.wearShoes("cloth/nv_shoes_98");
-
-    // Play an animation.
-    human.playAnimation("anim/HP_Share");
-
-    // Add the human to the scene.
-    const scene = SceneManager.getInstance(context).getCurrentScene();
-    scene.addElement(human);
-}
-```
-
-**Noted that resources such as face mapping, face target, hairs, dresses, animation, etc. should be placed under the resource path in advance**.
-
-Run the program and you will see a digital human in the browser.
-
-------------------
-
-## NOTICE
-MetaMakerDeveloper 发布的代码或数字资产（数字人、服装、动作、表情等）以及试用数字人小镜、大黑都属于黑镜科技公司。如需商用，请添加以下二维码联系，谢谢！
-
-For the codes, digital assets (including but not limited to digital human, clothing, animations, expressions, etc.) and trial digital human (e.g. xiaojing, dahei, etc.) released by MetaMakerDeveloper are all belong to Heijing Technology Company. For commercial use, please scan the following QR code to contact us, thank you!
-
-![20220826-094251](https://user-images.githubusercontent.com/110818144/186798509-1deb2c8a-27ce-4d41-9a89-ac2541fc1825.jpg)

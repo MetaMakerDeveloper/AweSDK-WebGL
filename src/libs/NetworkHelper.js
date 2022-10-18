@@ -33,7 +33,10 @@ export class NetWorkHelper {
         const tasks = [];
         for (const url in files) {
             const path = files[url];
-            tasks.push(this.DownloadFile(url, path));
+            console.log('download files path : ', path);
+            if (path != null && path != undefined && path != '') {
+                tasks.push(this.DownloadFile(url, path));
+            }
         }
         const result = await Promise.all(tasks);
         return result.findIndex((value) => value == false) < 0;

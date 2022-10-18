@@ -76,8 +76,8 @@ export class HumanHelper {
         const token = LicenseManager.getInstance(this.context).genAuthString();
         if (token == null || token == undefined || token == '') return;
 
-        const url = `https://open.metamaker.cn/api/openmm/v1/user_anchor_info`;
-        const result = await NetWorkHelper.Request(`${url}/${id}`, null, token);
+        const url = `https://open.metamaker.cn/api/openmm/v1/human_info`;
+        const result = await NetWorkHelper.Request(`${url}?anchor_id=${id}`, null, token);
         console.log('HumanHelper request human info :', result);
         const errCode = result.err_code;
         if (errCode == 0) {
@@ -156,14 +156,15 @@ export class HumanHelper {
         if (token == null || token == undefined || token == '') return;
 
         const url = `https://open.metamaker.cn/api/openmm/v1/unity_res_by_ids`;
-        const result = await NetWorkHelper.Request(`${url}?ids=${ids.join(',')}`, null, token);
+        const result = await NetWorkHelper.Request(`${url}?ids=${ids.join(',')}&platform=webgl`, null, token);
         console.log('HumanHelper get article names :', result);
         const errCode = result.err_code;
         if (errCode == 0) {
             const names = [];
             const ret = result.ret;
             for (const item of ret) {
-                names.push(item.name.replace('test/', ''));
+                // names.push(item.name.replace('test/', ''));
+                names.push(item.name);
             }
             const outfitResult = await ResourceHelper.getInstance(this.context).loadOutfits(names);
             if (outfitResult) {

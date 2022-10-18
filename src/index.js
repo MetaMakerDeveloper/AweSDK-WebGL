@@ -1,5 +1,5 @@
 import { Color, Context, Vector3 } from 'awesdk-core'
-import { LicenseManager, HumanTimeSlice, Gender, ErrorReporter, BaseInfo, CameraTimeSlice, Timeline, TTSData, Transaction, SceneManager } from 'awesdk'
+import { LicenseManager, HumanTimeSlice, ErrorReporter, CameraTimeSlice, Timeline, TTSData, Transaction, SceneManager } from 'awesdk'
 import * as CryptoJS from 'crypto-js'
 import { AweSDK } from './libs/AweSDK'
 import { NetWorkHelper } from './libs/NetworkHelper'
@@ -34,8 +34,8 @@ async function loadFinished() {
 
     //  设置AppKey、AppSecret
     const licenseManager = LicenseManager.getInstance(context);
-    licenseManager.appKey = `88496f7da637cb4ae2d3bde327f70bab4794fc37`;
-    licenseManager.appSecret = `641c5509df6b7660ff884b7c4109946ba49722f8`;
+    licenseManager.appKey = `6b2760796632410d8b9f2505e4928b18`;
+    licenseManager.appSecret = `f2879a80b30b489b8cd4c88f063fdb3f`;
     //  也可以将AppKey和AppSecret计算Token的操作放在服务器，将计算结果通过下面代码设置到SDK中，达到隐藏AppKey和AppSecret目的
     // licenseManager.auth = `服务器计算结果`;
 
@@ -46,12 +46,8 @@ async function loadFinished() {
 
     //  下载动作资源
     const animationResult = await ResourceHelper.getInstance(context).loadAnimations([
-        'anim/anim_220415_F36',
-        'anim/anim_220415_F34',
-        'anim/anim_220415_F15',
-        'anim/BVH_149A_Char00',
-        'anim/Talking_P3_Nan_M0',
-        'anim/HP_Share'
+        'anim/BaseAnim/daiji_nan_huxi_M0',
+        'anim/BaseAnim/Anim_daiji_F01'
     ]);
     if (!animationResult)
         console.error('动画资源下载失败');
@@ -64,7 +60,9 @@ async function loadFinished() {
     Transaction.getInstance(context).start();
 
     //  根据ID，请求MetaMakerStudio上数字人形象
-    const human = await HumanHelper.getInstance(context).createHumanById('12181');
+    //  默认角色小静（女）id:92998
+    //  默认角色大黑（男）id:92997
+    const human = await HumanHelper.getInstance(context).createHumanById('92997');
     if (human == null) {
         console.log('加载人物失败');
         return;
@@ -92,7 +90,7 @@ async function loadFinished() {
     const slice = new HumanTimeSlice(human);
     slice.setStartTime(0);
     slice.setDuration(duration);
-    slice.setAnimation(`anim/anim_220415_F36`);
+    slice.setAnimation(`anim/BaseAnim/Anim_daiji_F01`);
     scene.getTimeline().addTimeSlice(slice);
 
     //  添加镜头时间片
@@ -201,7 +199,7 @@ let interruptTTSData;
     });
 
     addButton('加载数据', () => {
-        const data = '{"first":{"reference":{"Object:0x0000000000000004":{"id":"Object:0x0000000000000004","class":"Camera","data":{"properties":{"position":"Vector3|(0,0.5,8)","rotation":"Vector3|(0,180,0)"},"children":[],"attributes":{}}},"Object:0x0000000000000005":{"id":"Object:0x0000000000000005","class":"Human","data":{"properties":{"gender":"female","face_texture":"tmp/52440327cd9d2ad049e417399caaa951f39b7cfb.jpg","face_target":"tmp/ee1af3ae10dba71a0a5292db52018a5f14350a03.target","body_texture":"","position":"Vector3|(0,0,0)","dress":["cloth/nv_neiyi_03_down","cloth/nv_neiyi_03_up","cloth/nv_tf_159","cloth/nv_shoes_78","cloth/nv_down_02_02","cloth/nv_up_07_01_02"]},"children":[],"attributes":{"wear_items":{"hair":"cloth/nv_tf_159","shoes":"cloth/nv_shoes_78"},"outfits":["cloth/nv_down_02_02","cloth/nv_up_07_01_02"],"targets":{},"underwear":["cloth/nv_neiyi_03_down","cloth/nv_neiyi_03_up"]}}},"Object:0x0000000000000003":{"id":"Object:0x0000000000000003","class":"RootElement","data":{"properties":{},"children":["Object:0x0000000000000004","Object:0x0000000000000005"],"attributes":{}}},"Object:0x0000000000000006":{"id":"Object:0x0000000000000006","class":"HumanTimeSlice","data":{"start_time":"Float|0","duration":"Float|10","enabled":"Bool|true","tags":[],"element":"Object:0x0000000000000005","properties":{"animation":"anim/anim_220415_F36"}}},"Object:0x0000000000000008":{"id":"Object:0x0000000000000008","class":"HumanTimeSlice","data":{"start_time":"Float|0","duration":"Float|10","enabled":"Bool|true","tags":[],"element":"Object:0x0000000000000005","properties":{"tts":{"tts_id":"acd298cfe16db07b8b6c7434229b8612","tts_volume":"Float|1","tts_play_mouth_anim":"Bool|true","tts_play_face_anim":"Bool|true","tts_play_audio":"Bool|true"}}}},"Object:0x0000000000000002":{"id":"Object:0x0000000000000002","class":"Timeline","data":{"time_slices":["Object:0x0000000000000006","Object:0x0000000000000008"]}}},"id":"Object:0x0000000000000001","class":"Scene","data":{"root":"Object:0x0000000000000003","timeline":"Object:0x0000000000000002","camera":"Object:0x0000000000000004"}}}';
+        const data = '{"first":{"reference":{"Object:0x0000000000000004":{"id":"Object:0x0000000000000004","class":"Camera","data":{"properties":{"position":"Vector3|(0,0.5,8)","rotation":"Vector3|(0,180,0)"},"children":[],"attributes":{}}},"Object:0x0000000000000005":{"id":"Object:0x0000000000000005","class":"Human","data":{"properties":{"gender":"female","face_texture":"tmp/52440327cd9d2ad049e417399caaa951f39b7cfb.jpg","face_target":"tmp/ee1af3ae10dba71a0a5292db52018a5f14350a03.target","body_texture":"","position":"Vector3|(0,0,0)","dress":["cloth/nv_neiyi_03_down","cloth/nv_neiyi_03_up","cloth/nv_tf_159","cloth/nv_shoes_78","cloth/nv_down_02_02","cloth/nv_up_07_01_02"]},"children":[],"attributes":{"wear_items":{"hair":"cloth/nv_tf_159","shoes":"cloth/nv_shoes_78"},"outfits":["cloth/nv_down_02_02","cloth/nv_up_07_01_02"],"targets":{},"underwear":["cloth/nv_neiyi_03_down","cloth/nv_neiyi_03_up"]}}},"Object:0x0000000000000003":{"id":"Object:0x0000000000000003","class":"RootElement","data":{"properties":{},"children":["Object:0x0000000000000004","Object:0x0000000000000005"],"attributes":{}}},"Object:0x0000000000000006":{"id":"Object:0x0000000000000006","class":"HumanTimeSlice","data":{"start_time":"Float|0","duration":"Float|10","enabled":"Bool|true","tags":[],"element":"Object:0x0000000000000005","properties":{"animation":"anim/BaseAnim/Anim_daiji_F01"}}},"Object:0x0000000000000008":{"id":"Object:0x0000000000000008","class":"HumanTimeSlice","data":{"start_time":"Float|0","duration":"Float|10","enabled":"Bool|true","tags":[],"element":"Object:0x0000000000000005","properties":{"tts":{"tts_id":"acd298cfe16db07b8b6c7434229b8612","tts_volume":"Float|1","tts_play_mouth_anim":"Bool|true","tts_play_face_anim":"Bool|true","tts_play_audio":"Bool|true"}}}},"Object:0x0000000000000002":{"id":"Object:0x0000000000000002","class":"Timeline","data":{"time_slices":["Object:0x0000000000000006","Object:0x0000000000000008"]}}},"id":"Object:0x0000000000000001","class":"Scene","data":{"root":"Object:0x0000000000000003","timeline":"Object:0x0000000000000002","camera":"Object:0x0000000000000004"}}}';
         const result = SceneManager.getInstance(context).loadData("domain", data);
         const scene = SceneManager.getInstance(context).switchScene('first');
         scene.getTimeline().setLoop(Number.MAX_VALUE);
