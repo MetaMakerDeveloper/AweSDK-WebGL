@@ -62,7 +62,7 @@ async function loadFinished() {
     //  根据ID，请求MetaMakerStudio上数字人形象
     //  默认角色小静（女）id:92998
     //  默认角色大黑（男）id:92997
-    const human = await HumanHelper.getInstance(context).createHumanById('92997');
+    const human = await HumanHelper.getInstance(context).createHumanById('92998');
     if (human == null) {
         console.log('加载人物失败');
         return;
