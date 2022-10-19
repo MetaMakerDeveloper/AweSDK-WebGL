@@ -124,9 +124,10 @@ async function structTTSData(text) {
     const params = {
         text: text,
         tts_args: `{"voice_name":"智能客服_静静","speed":50,"volume":50}`,
-        audio_type: 'wav'
+        audio_type: 'wav',
+        storage_type: 'cloud'
     }
-    const result = await NetWorkHelper.Request(`http://open.metamaker.cn/api/tts/v1/text_to_anim`, params, LicenseManager.getInstance(context).genAuthString());
+    const result = await NetWorkHelper.Request(`http://open.metamaker.cn/api/openmm/v1/text_to_anim`, params, LicenseManager.getInstance(context).genAuthString());
     console.log('tts result :', result);
     if (result.err_code == 0) {
         const duration = result.ret.audio_info.audio_duration;
